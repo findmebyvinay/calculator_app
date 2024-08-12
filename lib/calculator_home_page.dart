@@ -49,29 +49,38 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
     else if(operator=='-'){
       outputs=num1-num2;
     }
+     else if(operator=='X'){
+        outputs=num1*num2;
+
+      }
     else if(operator=='/'){
       if(num2!=0){
          outputs=num1/num2;
       }
+      
       else{
         output='error';
         return;
       }
+      
     }
     output=outputs.toString();
-    num1=outputs;
-    num2=0;
-    operator='0';
+    //num1=outputs;
+    //num2=0;
+    //operator='0';
    }
 
    
   Widget _buildButton(String buttonText) {
     return Expanded(
       child: ElevatedButton(
+        style: ButtonStyle(
+          backgroundColor:WidgetStatePropertyAll(Colors.grey), ),
         onPressed: () => buttonPressed(buttonText),
         child: Text(
           buttonText,
-          style: TextStyle(fontSize: 24),
+          style: TextStyle(fontSize: 20,
+          color: Colors.white),
         ),
       ),
     );
@@ -81,16 +90,15 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
     return Scaffold(
       appBar:AppBar(
         elevation: 0,
-        leading:IconButton(onPressed:(){},
-         icon:Icon(Icons.menu_sharp,size:20,)),
          title:Text('Calculator',
          style: TextStyle(
-        fontSize: 20,
+        fontSize: 30,
         fontWeight: FontWeight.bold,
-        color: Colors.teal[300]
+        color: Colors.grey
          ),),
          centerTitle: true,
       ),
+      backgroundColor: Colors.grey[300],
       body: Column(
         children: [
          Expanded(
@@ -113,14 +121,16 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
               _buildButton('/'),
             ],
           ),
+          const SizedBox(height: 5,),
           Row(
             children: [
               _buildButton('4'),
               _buildButton('5'),
               _buildButton('6'),
-              _buildButton('x'),
+              _buildButton('X'),
             ],
           ),
+          const SizedBox(height: 5,),
           Row(
             children: [
               _buildButton('1'),
@@ -129,6 +139,7 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
               _buildButton('-'),
             ],
           ),
+          const SizedBox(height: 5,),
           Row(
             children: [
               _buildButton('0'),
